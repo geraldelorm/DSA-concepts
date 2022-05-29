@@ -89,6 +89,23 @@ class DynamicArray(object):
     def sort(self): #Time Complexity depends on underlying sorting algo
         return sorted(self.static_arr)
 
+    # Adds an element at the specified position
+    def insert(self, index, value): #Time Complexity = O(n)
+        if self.size == self.capacity:
+            self._resize(2 * self.capacity)
+        
+        # Moving element over for insertion
+        for i in range(self.size-1,index-1,-1):
+            self.static_arr[i+1]=self.static_arr[i]
+          
+        self.static_arr[index] = value
+        self.size+=1
+
+    # Removes the first item with the specified value
+    def remove(self, value): #Time Complexity = O(n)
+        # Similar to insertion
+        return
+
 
 # Test
 dy_array = DynamicArray()
@@ -117,6 +134,9 @@ assert dy_array.sort() == [1, 2, 3 , 5, 6, 7, 7, 20]
 
 dy_array.pop()
 assert len(dy_array) == 7
+
+dy_array.insert(2, 50)
+assert dy_array[2] == 50
 
 dy_array.clear()
 assert len(dy_array) == 0
