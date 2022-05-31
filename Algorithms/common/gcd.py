@@ -11,7 +11,7 @@ def gcd(numerator, denominator): # greatest common divisor
 
 
 # Optimal Solution
-def gcd(numerator, denominator): # greatest common divisor
+def gcd(numerator, denominator): # greatest common divisor -- gcd(a,b) = gcd(b,a')
     if denominator == 0:
         return numerator
     numPrime = numerator % denominator
