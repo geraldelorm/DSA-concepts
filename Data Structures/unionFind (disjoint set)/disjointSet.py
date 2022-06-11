@@ -3,13 +3,13 @@ class DisjointSet:
     parent = {}
  
     # perform MakeSet operation
-    def makeSet(self, universe):
+    def makeSet(self, universe): #O(n)
         # create `n` disjoint sets (one for each item)
         for i in universe:
             self.parent[i] = i
  
     # Find the root of the set in which element `k` belongs
-    def Find(self, k):
+    def Find(self, k): #O(log*n)
         # if `k` is root
         if self.parent[k] == k:
             return k
@@ -17,7 +17,7 @@ class DisjointSet:
         return self.Find(self.parent[k])
  
     # Perform Union of two subsets
-    def Union(self, a, b):
+    def Union(self, a, b): #O(log*n)
         # find the root of the sets in which elements
         # `x` and `y` belongs
         x = self.Find(a)
