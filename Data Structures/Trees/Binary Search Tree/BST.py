@@ -6,7 +6,6 @@ class Node:
         self.value = value
         self.right = None
 
-
 class BST:
     def __init__(self) -> None:
         self.size = 0
@@ -39,9 +38,6 @@ class BST:
                 self.size += 1
                 return  
             self.__insert(self.right, value)
-
-    def remove(self, value): # O(log^n)
-        pass
 
     def findMin(self): # O(log^n)
         curr_node = self.root
@@ -80,8 +76,6 @@ class BST:
             return self.__inOrder(self.root)
         if order == "post":
             return self.__postOrder(self.root)
-        if order == "level": #Breath first Search
-            return self.__levelOrder(self.root)
 
     def __preOrder(self, root, output = []): #DFS # O(n)
         if root.value:
@@ -111,18 +105,20 @@ class BST:
             output.append(root.value)
         return str(output)
 
-    def __levelOrder(self, root): #BFS # O(n)
-        visited = []
-        queue = [root]
+# External Operations 
 
-        while len(queue):
-            node = queue.pop(0)
-            visited.append(node.value)
+def breathFirstSearch(root): #BFS # O(n)
+    visited = []
+    queue = [root]
 
-            if node.left: queue.append(node.left)
-            if node.right: queue.append(node.right)
+    while len(queue):
+        node = queue.pop(0)
+        visited.append(node.value)
 
-        return str(visited)
+        if node.left: queue.append(node.left)
+        if node.right: queue.append(node.right)
+
+    return str(visited)
         
 
 def height(root): # O(n)
@@ -130,6 +126,38 @@ def height(root): # O(n)
     leftHeight = height(root.left)
     rightHeight = height(root.right)
     return max(leftHeight, rightHeight) + 1
+
+def findMin(node): # O(log^n)
+    curr_node = node
+    while curr_node.left:
+        curr_node = curr_node.left
+
+    return curr_node
+
+def remove(root, value): # O(log^n)
+    if root is None: return "Tree is Empty"
+
+    if root.value < value:
+        root.right = remove(root.right, value)
+    if root.value > value:
+        root.left = remove(root.left, value)
+
+    if root.value == value:
+        if root.left is None:
+            temp = root.right
+            root = None
+            return temp
+ 
+        elif root.right is None:
+            temp = root.left
+            root = None
+            return temp
+        
+        temp = findMin(root.right)
+        root.key = temp.key
+        root.right = remove(root.right, temp.key)
+ 
+    return root
 
 
 
@@ -151,4 +179,8 @@ assert tree.contains(4) == True
 assert tree.traverse("pre") == "[5, 4, 3, 6]"
 assert tree.traverse("in") == "[3, 4, 5, 6]"
 assert tree.traverse("post") == "[3, 4, 6, 5]"
-assert tree.traverse("level") == "[5, 4, 6, 3]"
+
+assert breathFirstSearch(tree.root) == "[5, 4, 6, 3]"
+
+remove(tree.root, 3)
+assert breathFirstSearch(tree.root) == "[5, 4, 6]"
