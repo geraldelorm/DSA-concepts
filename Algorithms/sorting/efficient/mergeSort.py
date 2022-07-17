@@ -40,6 +40,8 @@ def mergeArr(myList, left, right): #O(n)
     
     return myList
 
+# Time = O(nlogn)
+# Space = O(1)
 
 # TEST
 assert mergeSort([5, 3, 4, 2, 1]) == [1, 2, 3, 4, 5]
