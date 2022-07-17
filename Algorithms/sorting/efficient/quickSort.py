@@ -9,8 +9,8 @@ def quickSort(arr):
 
 
 
-# Time = O(nlogn)
-# Space = O(1)
+# Time = O(nlogn) or O(n^2) in worse case with randomization of pivot
+# Space = O(n)
 
 # TEST
 assert quickSort([5, 3, 4, 2, 1]) == [1, 2, 3, 4, 5]
