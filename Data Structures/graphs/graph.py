@@ -70,7 +70,7 @@ graph['jonny'] = []
 
 
 # breath First Search 
-def search(graph, start, ele):
+def search(start, ele):
     queue = deque()
     queue.append(start)
     visited = []
@@ -88,8 +88,8 @@ def search(graph, start, ele):
 
 
 # TEST Shortest Path Finder
-assert search(graph,"you", "bob") == True
-assert search(graph, "you", "you") == True
-assert search(graph, "you", "nobody") == False
+assert search("you", "bob") == True
+assert search("you", "you") == True
+assert search("you", "nobody") == False
 
 print("ALL PASSED ✔")
